@@ -1,0 +1,39 @@
+<p-table #dt1 [value]="tournaments.content" selectionMode="single" dataKey="id" [tableStyle]="{'min-width': '50rem'}"
+         [rows]="5" [paginator]="true" stateStorage="session" stateKey="statedemo-session">
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="id" style="width:25%">Id <p-sortIcon field="name"></p-sortIcon></th>
+      <th pSortableColumn="lieu" style="width:25%">Lieu <p-sortIcon field="country.name"></p-sortIcon></th>
+      <th pSortableColumn="dateFinInscriptions" style="width:25%">Date fin inscription <p-sortIcon field="representative.name"></p-sortIcon></th>
+      <th pSortableColumn="status" style="width:25%">Status <p-sortIcon field="status"></p-sortIcon></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-customer>
+    @for (tournament of tournaments.content; track tournament.id) {
+      <tr [pSelectableRow]="tournament">
+        <td>
+          <span class="p-column-title">Id</span>
+          {{tournament.id}}
+        </td>
+        <td>
+          <span class="p-column-title">Lieu</span>
+          <span class="ml-1 vertical-align-middle">{{tournament.lieu}}</span>
+        </td>
+        <td>
+          <span class="p-column-title">Date fin inscription</span>
+          <span class="ml-1 vertical-align-middle">{{tournament.dateFinInscriptions}}</span>
+        </td>
+        <td>
+          <span class="p-column-title">Status</span>
+          {{tournament.statut}}
+        </td>
+      </tr>
+    }
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="4">No tournaments found.</td>
+    </tr>
+  </ng-template>
+</p-table>
+
