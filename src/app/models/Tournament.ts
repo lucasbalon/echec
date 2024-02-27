@@ -1,4 +1,5 @@
 import {Player} from "./Player";
+import {Validators} from "@angular/forms";
 
 export enum Statut {
   EN_ATTENTE_DE_JOUEURS = "EN_ATTENTE_DE_JOUEURS",
@@ -12,21 +13,21 @@ export enum Categorie {
   VETERAN = "VETERAN"
 }
 
-export interface TournamentData {
-  id: number;
-  nom: string;
-  lieu: string;
-  nombreJoueursInscrits: number;
-  nombreMinJoueurs: number;
-  nombreMaxJoueurs: number;
-  eLOMin: number;
-  eLOMax: number;
-  categories: Categorie[];
-  statut: Statut;
-  womenOnly: boolean;
-  dateFinInscriptions: Date;
-  rondeCourante: number;
-  joueursInscrits: Player[];
+export class TournamentData {
+  id!: number;
+  nom!: string;
+  lieu!: string;
+  nombreJoueursInscrits!: number;
+  nombreMinJoueurs!: number;
+  nombreMaxJoueurs!: number;
+  eLOMin!: number;
+  eLOMax!: number;
+  categories!: Categorie[];
+  statut!: Statut;
+  womenOnly!: boolean;
+  dateFinInscriptions!: Date;
+  rondeCourante!: number;
+  joueursInscrits!: Player[];
 }
 
 interface Sort {
@@ -62,4 +63,10 @@ export class TournamentSearchForm {
   nom!: string;
   statut!: Statut;
   categories!: Categorie[];
+}
+
+export const SEARCH_FORM ={
+  nom:'',
+  statut:'',
+  categorie: ''
 }

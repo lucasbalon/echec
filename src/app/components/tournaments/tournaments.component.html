@@ -1,4 +1,30 @@
-<p-table #dt1 [value]="tournaments.content" selectionMode="single" dataKey="id" [tableStyle]="{'min-width': '50rem'}"
+<div class="container mt-4">
+  <form [formGroup]="rechercheForm" (ngSubmit)="submit()" class="form-inline justify-content-between flex-nowrap">
+    <div class="form-group flex-grow-1">
+      <label for="name" class="mr-2">Nom</label>
+      <input type="text" id="name" class="form-control w-100" formControlName="name"/>
+    </div>
+
+    <div class="form-group flex-grow-1">
+      <label for="statut" class="mr-2">Statut</label>
+      <select id="statut" class="form-control w-100" formControlName="statut">
+        <option *ngFor="let statut of statuts" [value]="statut">{{ statut }}</option>
+      </select>
+    </div>
+
+    <div class="form-group flex-grow-1">
+      <label class="mr-2">Categorie</label>
+      <div *ngFor="let categorie of categories; let i = index">
+        <input type="checkbox" [value]="categorie" [id]="'categorie' + i" (change)="onCheckboxChange($event)"/>
+        <label [for]="'categorie' + i">{{ categorie }}</label>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Soumettre</button>
+  </form>
+</div>
+
+<p-table #dt1 [value]="tournaments" selectionMode="single" dataKey="id" [tableStyle]="{'min-width': '50rem'}"
          [rows]="5" [paginator]="true" stateStorage="session" stateKey="statedemo-session">
   <ng-template pTemplate="header">
     <tr>
@@ -8,27 +34,25 @@
       <th pSortableColumn="status" style="width:25%">Status <p-sortIcon field="status"></p-sortIcon></th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-customer>
-    @for (tournament of tournaments.content; track tournament.id) {
-      <tr [pSelectableRow]="tournament">
+  <ng-template pTemplate="body" let-tournaments>
+      <tr [pSelectableRow]="tournaments">
         <td>
           <span class="p-column-title">Id</span>
-          {{tournament.id}}
+          {{tournaments.id}}
         </td>
         <td>
           <span class="p-column-title">Lieu</span>
-          <span class="ml-1 vertical-align-middle">{{tournament.lieu}}</span>
+          <span class="ml-1 vertical-align-middle">{{tournaments.lieu}}</span>
         </td>
         <td>
           <span class="p-column-title">Date fin inscription</span>
-          <span class="ml-1 vertical-align-middle">{{tournament.dateFinInscriptions}}</span>
+          <span class="ml-1 vertical-align-middle">{{tournaments.dateFinInscriptions}}</span>
         </td>
         <td>
           <span class="p-column-title">Status</span>
-          {{tournament.statut}}
+          {{tournaments.statut}}
         </td>
       </tr>
-    }
   </ng-template>
   <ng-template pTemplate="emptymessage">
     <tr>
